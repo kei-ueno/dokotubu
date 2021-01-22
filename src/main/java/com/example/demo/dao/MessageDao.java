@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,8 +25,6 @@ public class MessageDao implements MessageDaoInterface {
 		this.namedParameterjdbcTemplate = namedParameterjdbcTemplate;
 	}
 
-	
-
 //	@Override
 //	@Transactional
 //	public void insertUser(RegistationForm user) {
@@ -36,16 +35,10 @@ public class MessageDao implements MessageDaoInterface {
 	public void insertMessage(Message_tbl message) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		// メッセージテーブルへのインサート
-		String sql = "insert into MESSAGE_TBL" 
-				+ "(MESSAGE, LOG_ID) " 
-				+ "values(:MESSAGE,:LOG_ID);";
-		
-		System.out.println("[dao]");
-		System.out.println(message.getMessage());
-		System.out.println(message.getUserId());
+		String sql = "insert into MESSAGE_TBL" + "(MESSAGE, LOG_ID) " + "values(:MESSAGE,:LOG_ID);";
+
 		parameters.put("LOG_ID", message.getUserId());
 		parameters.put("MESSAGE", message.getMessage());
-		System.out.println(sql);
 
 		namedParameterjdbcTemplate.update(sql, parameters);
 //		
@@ -62,25 +55,24 @@ public class MessageDao implements MessageDaoInterface {
 
 		Map<String, Object> parameters = new HashMap<String, Object>();
 
-		String sql = "select M.* ,U.*"
-				+ "from MESSAGE_TBL as M "
-				+ "left outer join USER_TBL as U "
-				+ "on U.USERID = M.LOG_ID "
-				+ "order by M.MESSAGEID desc;";
+		String sql = "select M.* ,U.*" + "from MESSAGE_TBL as M " + "left outer join USER_TBL as U "
+				+ "on U.USERID = M.LOG_ID " + "order by M.MESSAGEID desc;";
 
 		List<Map<String, Object>> resultList = namedParameterjdbcTemplate.queryForList(sql, parameters);
 		List<ExtendedMessage> list = new ArrayList<ExtendedMessage>();
-		
-		for(Map<String, Object> result : resultList) {
+
+		for (Map<String, Object> result : resultList) {
 			ExtendedMessage message = new ExtendedMessage();
 			message.setAccount((String) result.get("account"));
 			message.setMessage((String) result.get("message"));
+			message.setPostDatetime((String) result.get("postdatetime").toString());
+			System.out.println(result.get("postdatetime").toString());
+
 
 			list.add(message);
 		}
 
 		return list;
 	}
-
 
 }

@@ -6,6 +6,7 @@ public class Message_tbl {
 	private String message;
 	private int userId;
 	private int messageId;
+	private String PostDatetime;
 
 	// コンストラクタ
 	public Message_tbl() {
@@ -35,5 +36,14 @@ public class Message_tbl {
 	public void setMessageId(int messageId) {
 		this.messageId = messageId;
 	}
+
+	public String getPostDatetime() {
+		return PostDatetime;
+	}
+
+	public void setPostDatetime(String postDatetime) {
+		PostDatetime = postDatetime;
+	}
+	
 
 }

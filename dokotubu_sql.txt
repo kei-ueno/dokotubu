@@ -35,7 +35,7 @@
 
   # ユーザー情報テーブルを作成する
   create table if not exists USER_TBL(
-  	USERID int(4) NOT NULL AUTO_INCREMENT,
+  	USERID int NOT NULL AUTO_INCREMENT,
   	ACCOUNT varchar(20) NOT NULL unique,
   	PASS text NOT NULL,
     primary key (USERID)
@@ -44,9 +44,10 @@
  
   # メッセージテーブルを作成する
   create table if not exists MESSAGE_TBL(
- 	MESSAGEID int(4) NOT NULL AUTO_INCREMENT,
-   	LOG_ID int(4) NOT NULL,
+ 	MESSAGEID int NOT NULL AUTO_INCREMENT,
+   	LOG_ID int NOT NULL,
   	MESSAGE text NOT NULL,
+  	POSTDATETIME DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     primary key (MESSAGEID),
     foreign key (LOG_ID) references USER_TBL(USERID)
   ) default charset=utf8mb4;

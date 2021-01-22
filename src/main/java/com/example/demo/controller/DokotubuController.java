@@ -69,6 +69,9 @@ public class DokotubuController {
 		List<ExtendedMessage> msgList = messageDao.getAllMessage(messageList);
 		model.addAttribute("msgList", msgList);
 		
+		for(ExtendedMessage Emessage : msgList) {
+		System.out.println(Emessage.getPostDatetime());
+		}
 //		for(ExtendedMessage e:msgList) {
 //			System.out.println(e.getAccount());
 //		}
@@ -107,11 +110,7 @@ public class DokotubuController {
 			redirectAttributes.addFlashAttribute("errmsg", "投稿内容がありません。");
 			return "redirect:Main";
 		}
-		System.out.println("[Form]"+mainForm.getMessage() + mainForm.getUserId());
 
-		System.out.println(userToken.getUserId());
-		System.out.println(mainForm.getMessage());
-		System.out.println(userToken.getUserId());
 		int userId = Integer.parseInt(mainForm.getUserId()) ;
 		messageTbl.setUserId(userId);
 		messageTbl.setMessage(mainForm.getMessage());
