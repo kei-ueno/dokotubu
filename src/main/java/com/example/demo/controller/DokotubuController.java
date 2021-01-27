@@ -30,7 +30,6 @@ import com.example.demo.form.MainForm;
 import com.example.demo.form.RegistationForm;
 import com.example.demo.service.LoginService;
 import com.example.demo.service.UserSettingService;
-import com.example.demo.service.UserSettingServiceInterface;
 
 @Controller
 @SessionAttributes(types = UserToken.class)
@@ -142,6 +141,7 @@ public class DokotubuController {
 		User_tbl userTbl = new User_tbl();
 		userTbl.setAccount(registationForm.getAccount());
 		userTbl.setPass(registationForm.getPass());
+		userTbl.setIcon(registationForm.getIcon());
 		
 		redirectAttributes.addFlashAttribute("title", "ユーザー登録完了");
 		

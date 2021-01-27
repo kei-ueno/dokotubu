@@ -6,6 +6,7 @@ public class User_tbl {
 	private String account;
 	private String pass;
 	private int userId;
+	private String icon;
 
 	// コンストラクタ
 	public User_tbl() {
@@ -35,5 +36,14 @@ public class User_tbl {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+	
 
 }
